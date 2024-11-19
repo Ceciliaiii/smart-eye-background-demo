@@ -52,7 +52,7 @@ const onSure = () => {
     loading.close();
     ElMessage({
       type: "success",
-      message: "更改政策成功"
+      message: "更改财务信息成功"
     });
     // 重置数据
     resetFormData();

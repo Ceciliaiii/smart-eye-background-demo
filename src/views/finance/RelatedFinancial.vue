@@ -1,47 +1,12 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import { nextTick, ref } from "vue";
+// 引入hook按钮逻辑整合文件
+import { useFinancialData } from "@/layout/hooks/RelatedFinancial/useFinancialData";
 // 引入弹窗子组件
 import FinancialDialog from "@/components/FinancialDialog.vue";
-const router = useRouter();
-// 定义弹窗子组件ref属性
-const changeDialog = ref();
-// 更新数据
-const parentData = ref({
-  net_profit: "",
-  operating_income: "",
-  processing_fees: "",
-  invoicing_data: "",
-  production_expenses: "",
-  total_amount: "",
-  line_data: "",
-  office_expenses: ""
-});
 
-// 更改按钮方法
-const onChange = () => {
-  // 打开子组件弹窗
-  changeDialog.value.open({});
-};
-
-// 接收子组件的数据方法
-const updateDataFromChild = async (receivedData: any) => {
-  console.log("接收到子组件传来的数据:", receivedData.value);
-  // 更新数据  receivedData.value...
-  // 去除空格处理
-  parentData.value.net_profit = receivedData.value.net_profit.trim();
-  parentData.value.operating_income =
-    receivedData.value.operating_income.trim();
-  parentData.value.processing_fees = receivedData.value.processing_fees.trim();
-  parentData.value.invoicing_data = receivedData.value.invoicing_data.trim();
-  parentData.value.production_expenses =
-    receivedData.value.production_expenses.trim();
-  parentData.value.total_amount = receivedData.value.total_amount.trim();
-  parentData.value.line_data = receivedData.value.line_data.trim();
-  parentData.value.office_expenses = receivedData.value.office_expenses.trim();
-  // 使用nextTick确保DOM更新完成后再进行后续操作（比如打印查看等）
-  await nextTick();
-};
+// 引入整合hook文件数据
+const { changeDialog, parentData, onChange, updateDataFromChild } =
+  useFinancialData();
 </script>
 
 <template>

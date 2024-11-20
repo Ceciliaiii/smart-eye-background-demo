@@ -2,7 +2,7 @@ import { ElLoading, ElMessage } from "element-plus";
 import type { User } from "types/RelatedPolicy/usertype";
 import type { Ref } from "vue";
 
-// 查找逻辑
+// 查找逻辑   定义响应式输入框、表单数据、查找过滤后的表单数据
 export const useSearchLogic = (
   input: Ref<string>,
   tableData: Ref<User[]>,

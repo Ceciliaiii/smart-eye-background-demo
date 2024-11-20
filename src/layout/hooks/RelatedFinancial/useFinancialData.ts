@@ -19,6 +19,7 @@ export const useFinancialData = () => {
     office_expenses: ""
   });
 
+  // 获取封装方法里的逻辑方法
   const { onChange } = useChangeDialogLogic(changeDialog);
   const { updateDataFromChild } = useUpdateDataLogic(parentData);
 

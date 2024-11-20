@@ -41,7 +41,7 @@ export const usePolicyTable = () => {
   // 查找过滤后的表单数据
   const filterTableData = ref<User[]>(tableData.value);
 
-  // 将封装的按钮逻辑方法 解构为on方法 并传参
+  // 将封装的方法 里的按钮方法解构出来 并传参
   const { onSearch } = useSearchLogic(input, tableData, filterTableData);
   const { onReset } = useResetLogic(input, tableData, filterTableData);
   const { handleEdit, handleEditData } = useEditLogic(

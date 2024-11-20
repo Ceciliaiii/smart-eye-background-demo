@@ -1,7 +1,7 @@
 import type { User } from "types/RelatedPolicy/usertype";
 import { ref, type Ref } from "vue";
 
-// 添加逻辑
+// 添加逻辑  定义子组件ref属性和表单数据
 export const useAddLogic = (addDialog: Ref<any>, tableData: Ref<User[]>) => {
   // 点击添加按钮 打开弹窗
   const handleAdd = () => {

@@ -2,7 +2,7 @@ import { ElMessage, ElMessageBox } from "element-plus";
 import type { User } from "types/RelatedPolicy/usertype";
 import type { Ref } from "vue";
 
-// 删除逻辑
+// 删除逻辑   定义tableData表单数据
 export const useDeleteLogic = (tableData: Ref<User[]>) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleDelete = (index: number, row: User) => {

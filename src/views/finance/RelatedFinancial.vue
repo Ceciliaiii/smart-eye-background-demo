@@ -4,8 +4,8 @@ import { useFinancialData } from "@/layout/hooks/RelatedFinancial/useFinancialDa
 // 引入弹窗子组件
 import FinancialDialog from "@/components/FinancialDialog.vue";
 
-// 引入整合hook文件数据
-const { changeDialog, parentData, onChange, updateDataFromChild } =
+// 解构出整合文件的逻辑方法和数据
+const { router, changeDialog, parentData, onChange, updateDataFromChild } =
   useFinancialData();
 </script>
 

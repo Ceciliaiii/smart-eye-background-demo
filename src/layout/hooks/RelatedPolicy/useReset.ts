@@ -8,21 +8,32 @@ export const useResetLogic = (
   tableData: Ref<User[]>,
   filterTableData: Ref<User[]>
 ) => {
-  const onReset = () => {
-    // 加载效果
+  const onReset = async () => {
+    // 开启加载效果
     const loading = ElLoading.service({
       lock: true,
       text: "Loading",
       background: "rgba(0, 0, 0, 0.7)"
     });
-    // 清空搜索框，重新渲染
-    input.value = "";
-    filterTableData.value = tableData.value;
-    loading.close();
-    ElMessage({
-      type: "success",
-      message: "重置成功"
-    });
+    try {
+      await new Promise<void>(resolve => {
+        setTimeout(() => {
+          // 清空搜索框，重新渲染
+          input.value = "";
+          filterTableData.value = tableData.value;
+          // 关闭加载效果
+          loading.close();
+          resolve();
+        }, 1000); // 此处通过setTimeout模拟异步操作耗时
+      });
+
+      ElMessage({
+        type: "success",
+        message: "重置成功"
+      });
+    } catch (error) {
+      ElMessage.error("重置操作出现错误：" + error.message);
+    }
   };
   return {
     onReset

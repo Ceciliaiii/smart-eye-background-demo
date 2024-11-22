@@ -46,28 +46,39 @@ const onCancel = () => {
   centerDialogVisible.value = false;
 };
 // 添加按钮
-const onSure = () => {
+const onSure = async () => {
   if (!textarea.value.trim()) {
     ElMessage.error("输入框为空，请输入正确信息");
   } else {
-    // 加载效果
+    // 开启加载效果
     const loading = ElLoading.service({
       lock: true,
       text: "Loading",
       background: "rgba(0, 0, 0, 0.7)"
     });
-    newMsg.value = textarea.value;
-    console.log("textarea赋值给newMsg后newMsg的值:", newMsg.value);
-    loading.close();
-    // 清空输入框
-    textarea.value = "";
-    // 关闭弹窗
-    centerDialogVisible.value = false;
-    ElMessage({
-      type: "success",
-      message: "添加成功"
-    });
-    emits("add-data", newMsg.value);
+    try {
+      await new Promise<void>(resolve => {
+        setTimeout(() => {
+          newMsg.value = textarea.value;
+          console.log("textarea赋值给newMsg后newMsg的值:", newMsg.value);
+          // 关闭加载效果
+          loading.close();
+          resolve();
+        }, 1000); // 此处通过setTimeout模拟异步操作耗时
+      });
+      // 清空输入框
+      textarea.value = "";
+      // 关闭弹窗
+      centerDialogVisible.value = false;
+      ElMessage({
+        type: "success",
+        message: "添加成功"
+      });
+      emits("add-data", newMsg.value);
+    } catch (error) {
+      // 捕获异步过程中出现的错误并提示错误信息
+      ElMessage.error("添加操作出现错误：" + error.message);
+    }
   }
 };
 defineExpose({ open });

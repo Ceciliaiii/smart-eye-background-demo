@@ -42,18 +42,7 @@ const onSure = () => {
   ) {
     ElMessage.error("有输入框为空，请输入正确信息");
   } else {
-    // 加载效果
-    const loading = ElLoading.service({
-      lock: true,
-      text: "Loading",
-      background: "rgba(0, 0, 0, 0.7)"
-    });
     getInputDataWithoutReactive();
-    loading.close();
-    ElMessage({
-      type: "success",
-      message: "更改财务信息成功"
-    });
     // 重置数据
     resetFormData();
     dialogFormVisible.value = false;

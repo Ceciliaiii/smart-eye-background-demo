@@ -1,4 +1,4 @@
-import { ElMessage } from "element-plus";
+import { ElLoading, ElMessage } from "element-plus";
 import type { User } from "types/RelatedPolicy/usertype";
 import type { Ref } from "vue";
 
@@ -17,17 +17,37 @@ export const useEditLogic = (
     editDialog.value.open({});
   };
 
-  const handleEditData = (newMsg: string) => {
+  const handleEditData = async (newMsg: string) => {
     console.log(newMsg);
 
     if (currentEditIndex.value !== -1 && currentEditRow.value) {
-      // 直接使用之前记录的编辑行索引，更新对应的message字段
-      tableData.value[currentEditIndex.value].message = newMsg;
-      // 提示信息
-      ElMessage({
-        type: "success",
-        message: "相关政策信息更新成功"
+      // 开启加载效果
+      const loading = ElLoading.service({
+        lock: true,
+        text: "Loading",
+        background: "rgba(0, 0, 0, 0.7)"
       });
+
+      try {
+        await new Promise<void>(resolve => {
+          setTimeout(() => {
+            // 直接使用之前记录的编辑行索引，更新对应的message字段
+            tableData.value[currentEditIndex.value].message = newMsg;
+            // 关闭加载效果
+            loading.close();
+            resolve();
+          }, 1000); // 此处通过setTimeout模拟异步操作耗时
+        });
+
+        // 提示信息
+        ElMessage({
+          type: "success",
+          message: "相关政策信息更新成功"
+        });
+      } catch (error) {
+        // 捕获异步过程中出现的错误并提示错误信息
+        ElMessage.error("更新操作出现错误：" + error.message);
+      }
     } else {
       ElMessage({
         type: "error",

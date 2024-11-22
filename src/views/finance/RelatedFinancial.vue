@@ -23,7 +23,9 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
           "
         >
           <span>净利润</span>
-          <p>{{ parentData.net_profit }}</p>
+          <p>
+            {{ parentData.net_profit }}
+          </p>
         </div>
         <div
           style="

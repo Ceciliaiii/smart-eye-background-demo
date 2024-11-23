@@ -6,6 +6,7 @@ import { useResetLogic } from "./useReset";
 import { useEditLogic } from "./useEdit";
 import { useDeleteLogic } from "./useDelete";
 import { useAddLogic } from "./useAdd";
+import { usePolicyStore } from "@/store/RelatedPolicy/policyStore";
 
 // 整合按钮方法
 export const usePolicyTable = () => {
@@ -18,8 +19,10 @@ export const usePolicyTable = () => {
   const currentEditIndex = ref(-1);
   const currentEditRow = ref<User | null>(null);
   const textareaContent = ref("");
-  // 初始表单数据
-  const tableData = ref<User[]>([]);
+  // 获取Pinia仓库实例
+  const policyStore = usePolicyStore();
+  // 初始表单数据，从Pinia仓库中获取policies数据来初始化tableData，确保类型匹配
+  const tableData = ref<User[]>(policyStore.policies as unknown as User[]);
 
   // 查找过滤后的表单数据
   const filterTableData = ref<User[]>(tableData.value);
@@ -34,7 +37,7 @@ export const usePolicyTable = () => {
     tableData
   );
   const { handleDelete } = useDeleteLogic(tableData);
-  const { handleAdd, handleAddData } = useAddLogic(addDialog, tableData);
+  const { handleAdd, handleAddData } = useAddLogic(addDialog);
 
   return {
     input,

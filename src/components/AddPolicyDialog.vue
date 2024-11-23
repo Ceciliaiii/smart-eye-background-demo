@@ -64,13 +64,13 @@ const onSure = async () => {
       await new Promise<void>(resolve => {
         setTimeout(() => {
           newPolicy.value = textarea.value;
-          console.log(
-            "textarea赋值给newPolicy后newPolicy的值:",
-            newPolicy.value
-          );
-          // 获取Pinia仓库实例
           const policyStore = usePolicyStore();
-          // 使用仓库的action方法添加数据
+          const index = policyStore.policies.length + 1; // 获取添加顺序索引
+          newPolicy.value = {
+            id: index.toString(),
+            message: textarea.value
+          };
+          // 使用仓库的action方法添加数据，确保传递User类型对象
           policyStore.addPolicy(newPolicy.value);
           // 关闭加载效果
           loading.close();

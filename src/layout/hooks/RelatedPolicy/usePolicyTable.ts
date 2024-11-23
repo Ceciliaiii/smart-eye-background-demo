@@ -19,24 +19,7 @@ export const usePolicyTable = () => {
   const currentEditRow = ref<User | null>(null);
   const textareaContent = ref("");
   // 初始表单数据
-  const tableData = ref<User[]>([
-    {
-      id: "01",
-      message: "黄金之风"
-    },
-    {
-      id: "02",
-      message: "不灭钻石"
-    },
-    {
-      id: "03",
-      message: "石之海"
-    },
-    {
-      id: "04",
-      message: "十字远征军"
-    }
-  ]);
+  const tableData = ref<User[]>([]);
 
   // 查找过滤后的表单数据
   const filterTableData = ref<User[]>(tableData.value);

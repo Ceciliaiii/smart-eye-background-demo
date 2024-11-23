@@ -8,6 +8,8 @@ import { createApp, type Directive } from "vue";
 import { useElementPlus } from "@/plugins/elementPlus";
 import { injectResponsiveStorage } from "@/utils/responsive";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
+import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import Table from "@pureadmin/table";
 // import PureDescriptions from "@pureadmin/descriptions";
 
@@ -23,7 +25,10 @@ import "./assets/iconfont/iconfont.js";
 import "./assets/iconfont/iconfont.css";
 
 const app = createApp(App);
-
+const pinia = createPinia();
+// 使用持久化插件
+pinia.use(piniaPluginPersistedstate);
+app.use(pinia);
 // 引入element-plus全局icon
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);

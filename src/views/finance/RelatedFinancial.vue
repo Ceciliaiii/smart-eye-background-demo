@@ -10,16 +10,18 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
 </script>
 
 <template>
-  <div class="container">
-    <div class="header">财务数据统计</div>
-    <div class="body">
-      <div class="body-content">
+  <div class="financial-container">
+    <div class="financial-header">
+      <span>财务数据统计</span>
+    </div>
+    <div class="financial-body">
+      <div class="financial-body-content">
         <div
           style="
             display: flex;
             flex-direction: column;
             width: 25%;
-            padding: 110px 0;
+            padding: 10vh 0;
           "
         >
           <span>净利润</span>
@@ -32,7 +34,7 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
             display: flex;
             flex-direction: column;
             width: 25%;
-            padding: 110px 0;
+            padding: 10vh 0;
           "
         >
           <span>营业收入</span>
@@ -43,7 +45,7 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
             display: flex;
             flex-direction: column;
             width: 25%;
-            padding: 110px 0;
+            padding: 10vh 0;
           "
         >
           <span>加工费收入</span>
@@ -54,7 +56,7 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
             display: flex;
             flex-direction: column;
             width: 25%;
-            padding: 110px 0;
+            padding: 10vh 0;
           "
         >
           <span>进销存数据</span>
@@ -65,7 +67,7 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
             display: flex;
             flex-direction: column;
             width: 25%;
-            padding: 110px 0;
+            padding: 10vh 0;
           "
         >
           <span>生产开支</span>
@@ -76,7 +78,7 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
             display: flex;
             flex-direction: column;
             width: 25%;
-            padding: 110px 0;
+            padding: 10vh 0;
           "
         >
           <span>贷款总额</span>
@@ -87,7 +89,7 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
             display: flex;
             flex-direction: column;
             width: 25%;
-            padding: 110px 0;
+            padding: 10vh 0;
           "
         >
           <span>生产线数据</span>
@@ -98,7 +100,7 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
             display: flex;
             flex-direction: column;
             width: 25%;
-            padding: 110px 0;
+            padding: 10vh 0;
           "
         >
           <span>办公开支</span>
@@ -106,12 +108,7 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
         </div>
       </div>
       <el-button
-        style="
-          width: 150px;
-          height: 45px;
-          margin-right: 0;
-          margin-bottom: 120px;
-        "
+        style="width: 15vw; height: 5vh; margin-right: 1vw; margin-bottom: 1vh"
         type="primary"
         @click="onChange"
         >更改</el-button
@@ -123,44 +120,50 @@ const { router, changeDialog, parentData, onChange, updateDataFromChild } =
 </template>
 
 <style lang="scss" scrop>
-.header {
+.financial-header {
   // background-color: pink;
-  // width: 100%;
-  height: 80px;
-  margin-left: 5px;
-  line-height: 80px;
+  width: 95%;
+  height: 10vh;
+  margin-left: 1vw;
+  line-height: 10vh;
   border-bottom: 2px solid black;
+
+  span {
+    margin-left: 1vw;
+    font-size: 18px;
+  }
 }
 
-.body {
+.financial-body {
   display: flex;
   // align-items: center;
   flex-direction: column; // 改为纵向排列
   align-items: flex-end; // 让子元素在交叉轴（横向）上靠右对齐
   justify-content: center;
   // background-color: red;
-  width: 100%;
-  height: 100vh;
+  width: 95%;
+  height: 70vh;
 
-  .body-content {
+  .financial-body-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     // background-color: skyblue;
     width: 90%;
-    height: 700px;
+    height: 60vh;
     // align-items: center;
     margin: auto;
+    // line-height: 500px;
   }
 
   span {
     margin: auto;
-    font-size: 16px;
+    font-size: 1vw;
   }
 
   p {
     margin: auto;
-    font-size: 26px;
+    font-size: 1.6vw;
   }
 }
 </style>

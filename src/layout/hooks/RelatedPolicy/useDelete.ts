@@ -13,6 +13,12 @@ export const useDeleteLogic = (tableData: Ref<User[]>) => {
     })
       .then(() => {
         tableData.value.splice(index, 1);
+
+        // 数据删除后，重新为剩余数据的id按顺序赋值
+        for (let i = 0; i < tableData.value.length; i++) {
+          tableData.value[i].id = (i + 1).toString();
+        }
+
         ElMessage({
           type: "success",
           message: "删除成功"

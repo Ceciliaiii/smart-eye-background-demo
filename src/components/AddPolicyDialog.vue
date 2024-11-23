@@ -7,14 +7,16 @@
     draggable
     style="border-radius: 10px"
   >
-    <span>相关政策信息：</span>
-    <el-input
-      v-model="textarea"
-      style="width: 240px"
-      :autosize="{ minRows: 2, maxRows: 4 }"
-      type="textarea"
-      placeholder="Please input"
-    />
+    <div style="display: flex; align-items: flex-start">
+      <span style="margin-right: 10px">相关政策信息：</span>
+      <el-input
+        v-model="textarea"
+        style="width: 240px"
+        :autosize="{ minRows: 2, maxRows: 4 }"
+        type="textarea"
+        placeholder="Please input"
+      />
+    </div>
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="onCancel">取消</el-button>
@@ -27,6 +29,8 @@
 <script lang="ts" setup>
 import { ElLoading, ElMessage } from "element-plus";
 import { ref, defineEmits } from "vue";
+import { usePolicyStore } from "@/store/RelatedPolicy/policyStore";
+import { emit } from "process";
 // 组件通信
 const emits = defineEmits(["add-data"]);
 const textarea = ref("");
@@ -38,7 +42,7 @@ const open = (row: any) => {
 };
 
 // 准备传输给父组件的数据
-const newMsg = ref();
+const newPolicy = ref();
 
 // 取消按钮
 const onCancel = () => {
@@ -59,8 +63,15 @@ const onSure = async () => {
     try {
       await new Promise<void>(resolve => {
         setTimeout(() => {
-          newMsg.value = textarea.value;
-          console.log("textarea赋值给newMsg后newMsg的值:", newMsg.value);
+          newPolicy.value = textarea.value;
+          console.log(
+            "textarea赋值给newPolicy后newPolicy的值:",
+            newPolicy.value
+          );
+          // 获取Pinia仓库实例
+          const policyStore = usePolicyStore();
+          // 使用仓库的action方法添加数据
+          policyStore.addPolicy(newPolicy.value);
           // 关闭加载效果
           loading.close();
           resolve();
@@ -74,7 +85,8 @@ const onSure = async () => {
         type: "success",
         message: "添加成功"
       });
-      emits("add-data", newMsg.value);
+      // 这里如果父组件还需要获取最新数据等，可以考虑通过其他方式通知父组件，比如触发事件等
+      emits("add-data");
     } catch (error) {
       // 捕获异步过程中出现的错误并提示错误信息
       ElMessage.error("添加操作出现错误：" + error.message);
@@ -83,3 +95,5 @@ const onSure = async () => {
 };
 defineExpose({ open });
 </script>
+
+<style lang="scss" scrop></style>

@@ -44,7 +44,7 @@ const onSure = () => {
   } else {
     getInputDataWithoutReactive();
     // 重置数据
-    resetFormData();
+    // resetFormData();
     dialogFormVisible.value = false;
   }
 };

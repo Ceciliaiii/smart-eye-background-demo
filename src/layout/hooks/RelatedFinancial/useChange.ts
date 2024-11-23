@@ -82,7 +82,7 @@ export const useUpdateDataLogic = (
 
       ElMessage({
         type: "success",
-        message: "数据更新成功"
+        message: "财务信息更新成功"
       });
     } catch (error) {
       ElMessage.error("数据更新出现错误：" + error.message);

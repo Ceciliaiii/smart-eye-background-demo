@@ -7,14 +7,16 @@
     draggable
     style="border-radius: 10px"
   >
-    <span>相关政策信息：</span>
-    <el-input
-      v-model="textarea"
-      style="width: 240px"
-      :autosize="{ minRows: 2, maxRows: 4 }"
-      type="textarea"
-      placeholder="Please input"
-    />
+    <div style="display: flex; align-items: flex-start">
+      <span style="margin-right: 10px">相关政策信息：</span>
+      <el-input
+        v-model="textarea"
+        style="width: 240px"
+        :autosize="{ minRows: 2, maxRows: 4 }"
+        type="textarea"
+        placeholder="Please input"
+      />
+    </div>
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="onCancel">取消</el-button>
@@ -27,6 +29,7 @@
 <script lang="ts" setup>
 import { ElLoading, ElMessage } from "element-plus";
 import { ref, defineEmits } from "vue";
+
 // 组件通信
 const emits = defineEmits(["edit-data"]);
 const textarea = ref("");
@@ -59,5 +62,8 @@ const onSure = () => {
     emits("edit-data", newMsg.value);
   }
 };
+
 defineExpose({ open });
 </script>
+
+<style lang="scss" scrop></style>

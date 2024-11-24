@@ -29,8 +29,6 @@
 <script lang="ts" setup>
 import { ElLoading, ElMessage } from "element-plus";
 import { ref, defineEmits } from "vue";
-import { usePolicyStore } from "@/store/RelatedPolicy/policyStore";
-import { emit } from "process";
 // 组件通信
 const emits = defineEmits(["add-data"]);
 const textarea = ref("");
@@ -42,7 +40,7 @@ const open = (row: any) => {
 };
 
 // 准备传输给父组件的数据
-const newPolicy = ref();
+const newMsg = ref();
 
 // 取消按钮
 const onCancel = () => {
@@ -63,15 +61,8 @@ const onSure = async () => {
     try {
       await new Promise<void>(resolve => {
         setTimeout(() => {
-          newPolicy.value = textarea.value;
-          const policyStore = usePolicyStore();
-          const index = policyStore.policies.length + 1; // 获取添加顺序索引
-          newPolicy.value = {
-            id: index.toString(),
-            message: textarea.value
-          };
-          // 使用仓库的action方法添加数据，确保传递User类型对象
-          policyStore.addPolicy(newPolicy.value);
+          newMsg.value = textarea.value;
+          console.log("textarea赋值给newMsg后newMsg的值:", newMsg.value);
           // 关闭加载效果
           loading.close();
           resolve();
@@ -85,8 +76,7 @@ const onSure = async () => {
         type: "success",
         message: "添加成功"
       });
-      // 这里如果父组件还需要获取最新数据等，可以考虑通过其他方式通知父组件，比如触发事件等
-      emits("add-data");
+      emits("add-data", newMsg.value);
     } catch (error) {
       // 捕获异步过程中出现的错误并提示错误信息
       ElMessage.error("添加操作出现错误：" + error.message);

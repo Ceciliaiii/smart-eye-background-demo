@@ -25,7 +25,7 @@ const open = (row: any) => {
 // 按钮逻辑
 const onCancel = () => {
   // 重置数据
-  resetFormData();
+  // resetFormData();
   dialogFormVisible.value = false;
 };
 const onSure = () => {
@@ -56,16 +56,16 @@ const getInputDataWithoutReactive = () => {
   emits("update-data", rawData);
 };
 // 重置弹窗数据的方法
-const resetFormData = () => {
-  changeForm.value.net_profit = "";
-  changeForm.value.operating_income = "";
-  changeForm.value.processing_fees = "";
-  changeForm.value.invoicing_data = "";
-  changeForm.value.production_expenses = "";
-  changeForm.value.total_amount = "";
-  changeForm.value.line_data = "";
-  changeForm.value.office_expenses = "";
-};
+// const resetFormData = () => {
+//   changeForm.value.net_profit = "";
+//   changeForm.value.operating_income = "";
+//   changeForm.value.processing_fees = "";
+//   changeForm.value.invoicing_data = "";
+//   changeForm.value.production_expenses = "";
+//   changeForm.value.total_amount = "";
+//   changeForm.value.line_data = "";
+//   changeForm.value.office_expenses = "";
+// };
 
 defineExpose({ open });
 </script>
@@ -77,7 +77,7 @@ defineExpose({ open });
     width="500"
     center
     draggable
-    style="border-radius: 10px"
+    class="financial-dialog"
   >
     <el-form :model="changeForm" style="margin-left: -60px">
       <el-form-item label="净利润: " :label-width="formLabelWidth">
@@ -113,3 +113,9 @@ defineExpose({ open });
     </template>
   </el-dialog>
 </template>
+
+<style scrop lang="scss">
+.financial-dialog {
+  border-radius: 10px;
+}
+</style>

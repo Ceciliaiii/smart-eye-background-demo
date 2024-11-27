@@ -5,22 +5,30 @@
     width="500"
     align-center
     draggable
-    style="border-radius: 10px"
+    class="addDialog-policy-dialog"
   >
-    <div style="display: flex; align-items: flex-start">
-      <span style="margin-right: 10px">相关政策信息：</span>
+    <div class="addDialog-input-wrapper">
+      <span class="addDialog-input-label">相关政策信息：</span>
       <el-input
         v-model="textarea"
-        style="width: 240px"
+        class="addDialog-textarea-input"
         :autosize="{ minRows: 2, maxRows: 4 }"
         type="textarea"
         placeholder="Please input"
       />
     </div>
     <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="onCancel">取消</el-button>
-        <el-button type="primary" @click="onSure"> 确认添加 </el-button>
+      <div class="addDialog-dialog-footer">
+        <el-button class="addDialog-cancel-button" @click="onCancel"
+          >取消</el-button
+        >
+        <el-button
+          class="addDialog-confirm-button"
+          type="primary"
+          @click="onSure"
+        >
+          确认添加
+        </el-button>
       </div>
     </template>
   </el-dialog>
@@ -74,7 +82,7 @@ const onSure = async () => {
       centerDialogVisible.value = false;
       ElMessage({
         type: "success",
-        message: "添加成功"
+        message: "政策信息添加成功"
       });
       emits("add-data", newMsg.value);
     } catch (error) {
@@ -86,4 +94,27 @@ const onSure = async () => {
 defineExpose({ open });
 </script>
 
-<style lang="scss" scrop></style>
+<style lang="scss" scrop>
+.addDialog-policy-dialog {
+  border-radius: 10px;
+}
+
+.addDialog-input-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.addDialog-input-label {
+  margin-right: 10px;
+}
+
+.addDialog-textarea-input {
+  width: 240px;
+}
+
+.addDialog-dialog-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+</style>

@@ -42,7 +42,7 @@ export const useEditLogic = (
         // 提示信息
         ElMessage({
           type: "success",
-          message: "相关政策信息更新成功"
+          message: "相关政策信息编辑成功"
         });
       } catch (error) {
         // 捕获异步过程中出现的错误并提示错误信息
